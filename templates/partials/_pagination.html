@@ -1,0 +1,48 @@
+{% load static %}
+
+
+<!-- Paginator -->
+<div class="row">
+    <div class="col-md-12">
+      <!-- Dynamic Pagination -->
+      <ul class="pagination">
+      {% if listings.has_other_pages %}
+        {% if listings.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="{{ listings.previous_page_number }}">&laquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link">&laquo;</a>
+          </li>
+        {% endif %}
+
+        <!-- Loop through the page range -->
+        {% for i in listings.paginator.page_range %}
+          {% if listings.number == i %}
+            <li class="page-item active">
+              <a class="page-link">{{ i }}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+          
+          {% endif %}
+
+
+        {% endfor %}
+
+        {% if listings.has_next%}
+          <li class="page-item">
+            <a class="page-link" href="{{ listings.next_page_number }}">&raquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link">&raquo;</a>
+          </li>
+        {% endif %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>

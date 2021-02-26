@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} | Homepage{% endblock title %}
+{% block content %}
+<!-- Showcase -->
+<section id="showcase">
+<div class="container text-center">
+    <div class="home-search p-5">
+    <div class="overlay p-5">
+        <h1 class="display-4 mb-4">
+        Property Searching Just Got So Easy
+        </h1>
+        <p class="lead">
+            Looking to buy property, a place you can call home?
+            You are just one search parameter away...
+        </p>
+        <div class="search">
+            {% include 'partials/_search_form.html' %}
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+
+<!-- Messages -->
+{% include 'partials/_messages.html' %}
+
+<!-- Listings -->
+<section id="listings" class="py-5">
+<div class="container">
+    <h3 class="text-center mb-3">Latest Listings</h3>
+    <div class="row">
+        {% include 'partials/_listing_card.html' %}
+    </div>
+</div>
+</section>
+
+<section id="services" class="py-5 bg-secondary text-white">
+<div class="container">
+    <div class="row text-center">
+    <div class="col-md-4">
+        <i class="fa fa-comment fa-4x mr-4"></i>
+        <hr>
+        <h3>Consulting Services</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+        hic dignissimos ratione ea quae.</p>
+    </div>
+    <div class="col-md-4">
+        <i class="fa fa-home fa-4x mr-4"></i>
+        <hr>
+        <h3>Propery Management</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+        hic dignissimos ratione ea quae.</p>
+    </div>
+    <div class="col-md-4">
+        <i class="fa fa-suitcase fa-4x mr-4"></i>
+        <hr>
+        <h3>Renting & Selling</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+        hic dignissimos ratione ea quae.</p>
+    </div>
+    </div>
+</div>
+</section>
+{% endblock content %}

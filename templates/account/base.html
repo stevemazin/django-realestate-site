@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  {% include 'partials/_headtags.html' %}
+  <body class="d-flex flex-column min-vh-100">
+    {% block body %}
+      <div class="pg-content flex-fill">
+        {% include 'partials/_topbar.html' %}
+        {% include 'partials/_navbar.html' %}
+        {% include 'partials/_messages.html' %}
+
+        {% block content %}
+        {% endblock content %}
+        
+        {% block extra_body %}
+        {% endblock extra_body %}
+      </div>
+    {% endblock body %}
+    <!-- Footer -->
+    {% include 'partials/_footer.html' %}
+
+    <!-- Bootstrap Dependencies -->
+    {% include 'partials/_dependencies.html' %}
+  </body>
+</html>

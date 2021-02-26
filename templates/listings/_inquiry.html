@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block content %}
+<div class="container">
+    <!-- Messages -->
+    {% include 'partials/_messages.html' %}
+    <a href="{% url 'listings' %}" class="btn btn-light my-2">Back To Listings</a>
+    <div class="row my-3">
+      <div class="col-md-8">
+        <div class="card p-3 p-md-2">
+          <h3 class="my-1">Inquiry Form</h3>
+          <form method="POST" action="{% url 'contact' listing.id %}">
+            {% if user.is_authenticated %}
+            <!-- Modal Form -->
+            {% csrf_token %}
+            <input type="hidden" name=user_id value="{{ user.id }}">
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-block btn-sm btn-secondary">
+    
+            {% else %}
+            {% csrf_token %}
+            <input type="hidden" name=user_id value="0">
+            {{ form|crispy }}
+            <hr>
+            <input type="submit" class="btn btn-block btn-sm btn-secondary">
+            {% endif %}
+          </form>
+        </div>
+      </div>
+      <!-- Aside -->
+      <aside class="col-md-4">
+          <div class="card">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
+              <div class="card-img-overlay">
+                  <h2>
+                      <!-- Price Badge -->
+                      <span class="badge badge-secondary text-white">Ksh {{ listing.price | intcomma }}</span>
+                  </h2>
+              </div>
+              <div class="card-body">
+                  <div class="listing-heading text-center">
+                  <a href="{% url 'listing' listing.id %}"><h4 class="text-primary">{{ listing.title }}</h4></a>
+                  <p class="text-primary">
+                      <i class="fa fa-map-marker text-secondary"></i> {{ listing.city }} {{ listing.locality }}, {{ listing.estate }}</p>
+                  </div>
+              </div>
+              </div>
+      </aside>
+    </div>
+    
+</div>
+{% endblock content %}

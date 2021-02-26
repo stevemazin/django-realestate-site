@@ -1,0 +1,64 @@
+{% load static %}
+<form action="{% url 'search' %}">
+    <!-- Form Row 1 -->
+    <div class="form-row">
+        <!-- Rental or Purchase Options -->
+        <div class="col-md-4 mb-3">
+            <label class="sr-only">Agreement</label>
+            <select name="agreement_terms" class="form-control">
+                <option selected="true" disabled="disabled">Rent or Buy</option>
+                <!-- Options Here -->
+                {% for key,value in agreement_choices.items %}
+                    <option
+                    {% if key == values.agreement_terms %}
+                        selected
+                    {% endif %}
+
+                    value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+      
+        <!-- Locality -->
+        <div class="col-md-4 mb-3">
+            <label class="sr-only">Locality</label>
+            <select name="locality" class="form-control">
+                <option selected="true" disabled="disabled">Town or Locality (All)</option>
+                <!-- Options Here -->
+                {% for key,value in locality_choices.items %}
+                    <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Search Field -->
+        <div class="col-md-4 mb-3">
+            <label class="sr-only">Keywords</label>
+            <input type="text" value="{{ values.keywords }}" name="keywords" class="form-control" placeholder="Keyword (Pool, Parking, etc)">
+        </div>
+    </div>
+    <!-- Form Row 2 -->
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label class="sr-only">Bedrooms</label>
+        <select name="bedrooms" class="form-control">
+          <option selected="true" disabled="disabled">Bedrooms (Any)</option>
+          {% for key,value in bedroom_choices.items %}
+              <option 
+              
+              {% if key == values.bedrooms %}
+                selected
+              {% endif %}
+
+              value="{{ key }}">{{ value }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- Price -->
+      <div class="col-md-8 mb-3">
+        <label class="sr-only">Price</label>
+        <input type="text" value="{{ values.price }}" name="price" class="form-control" placeholder="Rent or Purchase price">
+    </div>
+    </div>
+    <button class="btn btn-secondary btn-block mt-4" type="submit">Search</button>
+  </form>
