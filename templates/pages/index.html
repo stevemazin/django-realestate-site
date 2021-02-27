@@ -30,10 +30,28 @@
 <!-- Listings -->
 <section id="listings" class="py-5">
 <div class="container">
-    <h3 class="text-center mb-3">Latest Listings</h3>
-    <div class="row">
-        {% include 'partials/_listing_card.html' %}
-    </div>
+        {% if listings %}
+        <h3 class="text-center mb-3">Latest Listings</h3>
+          <div class="row">
+          {% for listing in listings %}
+            <!-- Listing -->
+          {% include 'partials/_listing_card.html' %}
+          {% endfor %}
+
+          </div>
+          <div class="view-more"> 
+            <a class="btn btn-outline-secondary" href="{% url 'listings' %}">View More</a>
+          </div>
+         
+          {% else %}
+          <div class="row">
+            <div class="col-md-12">
+                <p>No Listings Available</p>
+            </div>
+          </div>
+        
+        {% endif %}
+    
 </div>
 </section>
 

@@ -35,7 +35,17 @@
 <section id="listings" class="py-4">
   <div class="container">
     <div class="row">
+      <!-- Listing -->
+      {% if listings %}
+      {% for listing in listings %}
       {% include 'partials/_listing_card.html' %}
+      {% endfor %}
+
+      {% else %}
+      <div class="col-md-12">
+        <p>No Listings Available</p>
+      </div>
+    {% endif %}
     </div>
     {% include 'partials/_pagination.html' %}
   </div>

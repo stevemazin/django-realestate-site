@@ -13,10 +13,12 @@ class Listing (models.Model):
     locality = models.CharField(max_length=150)
     estate = models.CharField(null=True, blank=True, max_length=150)
     description = models.TextField(blank=True)
-    bathrooms = models.IntegerField()
     parking_space = models.IntegerField(default=0)
     bedrooms = models.IntegerField()
-    price = models.IntegerField()
+
+    buying_price = models.IntegerField(blank=True, null=True)
+    rent_price = models.IntegerField(blank=True, null=True)
+    
     rental = models.BooleanField(default=False, null=False, blank=False)
     for_sale = models.BooleanField(default=False, null=False, blank=False)
 

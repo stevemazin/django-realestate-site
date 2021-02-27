@@ -37,15 +37,31 @@
               <div class="card-img-overlay">
                   <h2>
                       <!-- Price Badge -->
-                      <span class="badge badge-secondary text-white">Ksh {{ listing.price | intcomma }}</span>
+                      {% if listing.rental and listing.for_sale %}
+                      <span class="badge badge-secondary text-white">Ksh {{ listing.rent_price | intcomma }}</span>
+                      {% elif listing.rental %}
+                      <span class="badge badge-secondary text-white">Ksh {{ listing.rent_price | intcomma }}</span>
+                      {% elif listing.for_sale %}
+                      <span class="badge badge-secondary text-white">Ksh {{ listing.buying_price | intcomma }}</span>
+            {% endif %}
                   </h2>
               </div>
               <div class="card-body">
                   <div class="listing-heading text-center">
-                  <a href="{% url 'listing' listing.id %}"><h4 class="text-primary">{{ listing.title }}</h4></a>
+                  <a href="{% url 'listing' listing.id %}"><h3 class="text-primary">{{ listing.title }}</h3></a>
+                  <div class="row text-primary text-center my-2">
+                    {% if listing.rental and listing.for_sale %}
+                    <div class="col-12">Available for Rent or Purchase</div>
+                    {% elif listing.rental %}
+                    <div class="col-12">Available for: Rent</div>
+                    {% elif listing.for_sale %}
+                    <div class="col-12">Available for: Purchase</div>
+                    {% endif %}
+                  </div>
                   <p class="text-primary">
                       <i class="fa fa-map-marker text-secondary"></i> {{ listing.city }} {{ listing.locality }}, {{ listing.estate }}</p>
                   </div>
+                  
               </div>
               </div>
       </aside>

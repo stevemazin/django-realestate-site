@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404
 
 from listings.choices import price_choices, bedroom_choices, locality_choices, agreement_choices
 # Import Models
@@ -6,6 +6,7 @@ from listings.models import Listing
 from realtors.models import Realtor
 
 def index (request):
+    # listings = get_list_or_404(klass=Listing, is_published=True)[:3]
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
     context = {
         'listings': listings,

@@ -9,9 +9,11 @@ from django.contrib import messages
 
 def index (request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
-    paginator = Paginator(listings, 3)
-    page = request.GET.get('page')
-    paged_listings = paginator.get_page(page)
+    paginator = Paginator(listings, 6)
+    print(f'Paginator numPages: {paginator.num_pages}')
+    print(f'Paginator objects: {paginator.count}')
+    page_number = request.GET.get('page')
+    paged_listings = paginator.get_page(page_number)
 
     context = {
         'listings': paged_listings
@@ -76,10 +78,11 @@ def search (request):
 
 
     # Paginations
-    paginator = Paginator(queryset_list, 3)
+    paginator = Paginator(queryset_list, 6)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)
 
+    
 
     context = {
         'locality_choices': locality_choices,

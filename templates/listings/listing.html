@@ -96,55 +96,79 @@
             </figure>
             {% endif %}
           </div>
+          
           <!-- Fields -->
           <div class="row mb-5 fields">
+            <!-- List 1 -->
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush text-primary">
+                {% if listing.rental and listing.for_sale %}
+                <li class="list-group-item">
+                  <i class="fa fa-briefcase text-secondary"></i> Options:
+                  <span class="float-right">Rent or Buy</span>
+                </li>
+                <li class="list-group-item">
+                  <i class="fa fa-money text-secondary"></i> Price:
+                  <span class="float-right">Ksh {{ listing.buying_price | intcomma }}</span>
+                </li>
+                <li class="list-group-item">
+                  <i class="fa fa-money text-secondary"></i> Rent :
+                  <span class="float-right">Ksh {{ listing.rent_price | intcomma }}</span>
+                </li>
+                {% elif listing.for_sale %}
+                <li class="list-group-item">
+                  <i class="fa fa-briefcase text-secondary"></i> Options:
+                  <span class="float-right">Buy</span>
+                </li>
+                <li class="list-group-item">
+                  <i class="fa fa-money text-secondary"></i> Price:
+                  <span class="float-right">Ksh {{ listing.buying_price | intcomma }}</span>
+                </li>
+                {% elif listing.rental %}
+                <li class="list-group-item">
+                  <i class="fa fa-briefcase text-secondary"></i> Options:
+                  <span class="float-right">Rent</span>
+                </li>
+                <li class="list-group-item">
+                  <i class="fa fa-money text-secondary"></i> Rent Price:
+                  <span class="float-right">Ksh {{ listing.rent_price | intcomma }}</span>
+                </li>
+                {% endif %}
+
+                <li class="list-group-item">
+                  <i class="fa fa-square  text-secondary"></i> Lot Size:
+                  <span class="float-right">{{ listing.lot_size }} Acres
+                  </span>
+                </li>
+                <hr>
+              </ul>
+            </div>
+
+            <!-- List 2 -->
             <div class="col-md-6">
               <ul class="list-group list-group-flush text-primary">
                 <li class="list-group-item">
-                  <i class="fa fa-money-bill-alt text-secondary"></i> Asking Price:
-                  <span class="float-right">Ksh {{ listing.price | intcomma }}</span>
+                  <i class="fa fa-th-large text-secondary"></i> Sq Feet:
+                  <span class="float-right">{{ listing.sqft }}</span>
                 </li>
                 <li class="list-group-item">
                   <i class="fa fa-bed text-secondary"></i> Bedrooms:
                   <span class="float-right">{{ listing.bedrooms }}</span>
                 </li>
                 <li class="list-group-item">
-                  <i class="fa fa-bath text-secondary"></i> Bathrooms:
-                  <span class="float-right">{{ listing.bathrooms }}</span>
-                </li>
-                <li class="list-group-item">
-                  <i class="fa fa-car text-secondary"></i> Parking:
+                  <i class="fa fa-car text-secondary"></i> Parking Slots:
                   <span class="float-right">{{ listing.parking_space }}
                   </span>
                 </li>
+               <hr>
               </ul>
+              
             </div>
-            <div class="col-md-6">
-              <ul class="list-group list-group-flush text-primary">
-                <li class="list-group-item">
-                  <i class="fa fa-th-large text-secondary"></i> Square Feet:
-                  <span class="float-right">{{ listing.sqft }}</span>
-                </li>
-                <li class="list-group-item">
-                  <i class="fa fa-square  text-secondary"></i> Lot Size:
-                  <span class="float-right">{{ listing.lot_size }} Acres
-                  </span>
-                </li>
-                <li class="list-group-item">
-                  <i class="fa fa-calendar text-secondary"></i> Listing Date:
-                  <span class="float-right">{{ listing.list_date }}</span>
-                </li>
-                <li class="list-group-item">
-                  <i class="fa fa-bed text-secondary"></i> Realtor:
-                  <span class="float-right">{{ listing.realtor }}
-                  </span>
-                </li>
 
 
-              </ul>
-            </div>
           </div>
 
+            
           <!-- Description -->
           <div class="row mb-5">
             <div class="col-md-12">
@@ -165,8 +189,5 @@
       </div>
     </div>
   </section>
-
-  <!-- Inquiry Modal -->
-  {% include 'listings/_modal.html' %}
-  
+  <!-- Modal Was Here -->
 {% endblock content %}

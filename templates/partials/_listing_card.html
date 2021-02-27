@@ -1,17 +1,20 @@
 {% load static %}
 {% load humanize %}
 
-{% if listings %}
-
-{% for listing in listings %}
 <!-- Listing 1 -->
-<div class="col-lg-4 mb-4">
+<div class="col-md-4 mb-4">
     <div class="card listing-preview">
     <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
     <div class="card-img-overlay">
         <h2>
             <!-- Price Badge -->
-            <span class="badge badge-secondary text-white">Ksh {{ listing.price | intcomma }}</span>
+            {% if listing.rental and listing.for_sale %}
+            <span class="badge badge-secondary text-white">Ksh {{ listing.rent_price | intcomma }}</span>
+            {% elif listing.rental %}
+            <span class="badge badge-secondary text-white">Ksh {{ listing.rent_price | intcomma }}</span>
+            {% elif listing.for_sale %}
+            <span class="badge badge-secondary text-white">Ksh {{ listing.buying_price | intcomma }}</span>
+            {% endif %}
         </h2>
     </div>
     <div class="card-body">
@@ -23,35 +26,28 @@
         <hr>
         <div class="row py-2 text-primary">
         <div class="col-6">
-            <i class="fa fa-th-large text-secondary"></i> Sqft: {{ listing.sqft }}</div>
+            <i class="fa fa-bed text-secondary"></i> Bedrooms: {{ listing.bedrooms }}</div>
         <div class="col-6">
             <i class="fa fa-car text-secondary"></i> Parking: {{ listing.parking_space }}</div>
         </div>
-        <div class="row py-2 text-primary">
-        <div class="col-6">
-            <i class="fa fa-bed text-secondary"></i> Bedrooms: {{ listing.bedrooms }}</div>
-        <div class="col-6">
-            <i class="fa fa-bath text-secondary"></i> Bathrooms: {{ listing.bathrooms }}</div>
-        </div>
         <hr>
-        <div class="row py-2 text-primary">
-        <div class="col-12">
-            <i class="fa fa-user text-secondary"></i> {{ listing.realtor }}</div>
+        <div class="row text-primary text-center">
+            {% if listing.rental and listing.for_sale %}
+            <div class="col-12">Available for Rent or Purchase</div>
+            {% elif listing.rental %}
+            <div class="col-12">Available for: Rent</div>
+            {% elif listing.for_sale %}
+            <div class="col-12">Available for: Purchase</div>
+            {% endif %}
+            
         </div>
-        <div class="row text-primary pb-2">
-        <div class="col-12">
-            <i class="fa fa-clock text-secondary"></i> {{ listing.list_date | timesince }}</div>
+        <div class="row text-primary text-center pb-2">
+            <div class="col-12">
+                <i class="fa fa-clock text-secondary text-center"></i>{{ listing.list_date | timesince }} ago</div>
         </div>
         <hr>
         <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
     </div>
     </div>
 </div>
-{% endfor %}
 
-{% else %}
-<div class="col-md-12">
-    <p>No Listings Available</p>
-</div>
-
-{% endif %}
