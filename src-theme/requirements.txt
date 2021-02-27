@@ -26,8 +26,7 @@ FUNCTIONALITY SPECS
     • Search listings by keyword, city, state, bedrooms and price (Homepage & search page)
     • List realtors on about page with “seller of the month” (Control via admin)
     • Listing page should have fields listed below
-    • Listing page should have 5 images with lightbox
-    • Lightbox should scroll through images
+    • Listing page should have 5 images with lightbox or similar photo gallery library
     • Listing page should have a form to submit inquiry for that property listing
     • Form info should go to database and notify realtor(s) with an email
     • Frontend register/login to track inquiries
